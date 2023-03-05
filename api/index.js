@@ -17,7 +17,7 @@ server.use(
     "/blog/:resource/:id/show": "/:resource/:id",
   })
 );
-server.use((request, response, next) => {
+/* server.use((request, response, next) => {
 
     if (request.method.toLowerCase() !== HTTP_METHOD_GET) {
 
@@ -37,7 +37,7 @@ server.use((request, response, next) => {
     }
 
     next()
-})
+}) */
 
 server.use(router)
 
