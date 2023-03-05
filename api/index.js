@@ -2,7 +2,7 @@ const jsonServer = require('json-server')
 const server = jsonServer.create()
 const router = jsonServer.router('db.json')
 const middlewares = jsonServer.defaults()
-const {PORT = 3000} = process.env
+const {PORT = 4000} = process.env
 if (process.env.NODE_ENV !== 'PRODUCTION') {
     require('dotenv').config()
 }
@@ -11,7 +11,12 @@ if (process.env.NODE_ENV !== 'PRODUCTION') {
 const HTTP_METHOD_GET = 'get'
 
 server.use(middlewares)
-
+server.use(
+  jsonServer.rewriter({
+    "/api/*": "/$1",
+    "/blog/:resource/:id/show": "/:resource/:id",
+  })
+);
 server.use((request, response, next) => {
 
     if (request.method.toLowerCase() !== HTTP_METHOD_GET) {
